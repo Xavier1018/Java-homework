@@ -4,47 +4,36 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class HandEvaluator {
-
-    // This method evaluates the hand and returns the type of hand (e.g., "Four of a Kind", "Full House")
+    // Method to evaluate the poker hand and return its rank (e.g., "Full House").
     private String evaluate(ArrayList<Card> hand) {
-        
-        // HashMap to count occurrences of each rank (card value)
+        // HashMap to store the frequency of each rank in the hand.
         HashMap<String, Integer> rankCount = new HashMap<>();
 
-        // Loop through each card in the hand
+        // Populate the rankCount map with the occurrences for each rank.
         for (Card card : hand) {
-            String rank = card.getRank(); // Get the rank of the card (e.g., "2", "3", "A", "K")
-            // Update the rank count in the map
-            rankCount.put(rank, rankCount.getOrDefault(rank, 0) + 1);
+            String rank = card.getRank(); // Get the rank of each card.
+            rankCount.put(rank, rankCount.getOrDefault(rank, 0) + 1); // Increment the count for each rank.
         }
 
-        // Variables to track the count of pairs, three of a kinds, and four of a kinds
-        int pairCount = 0;
-        boolean hasThreeOfAKind = false;
-        boolean hasFourOfAKind = false;
+        // Boolean flags to identify various hand types based on rank frequencies.
+        boolean hasPair = rankCount.containsValue(2); // True if there's at least one pair.
+        
+        // Corrected Two Pair check: counts the pairs in the hand; true if there are exactly two pairs.
+        boolean hasTwoPair = rankCount.values().stream().filter(count -> count == 2).count() == 2;
+        
+        boolean hasThreeOfAKind = rankCount.containsValue(3); // True if there's a three of a kind.
+        boolean hasFourOfAKind = rankCount.containsValue(4); // True if there's a four of a kind.
+        boolean hasFullHouse = hasThreeOfAKind && hasPair; // True if there's both a three of a kind and a pair.
 
-        // Loop through the values (counts) of the card ranks
-        for (int count : rankCount.values()) {
-            if (count == 2) {
-                pairCount++; // Increase pairCount if a card rank appears twice
-            } else if (count == 3) {
-                hasThreeOfAKind = true; // Set hasThreeOfAKind to true if a card rank appears three times
-            } else if (count == 4) {
-                hasFourOfAKind = true; // Set hasFourOfAKind to true if a card rank appears four times
-            }
-        }
-
-        // Check for different hand types based on the card counts
-        boolean hasTwoPair = pairCount == 2; // Two Pair exists if there are exactly two pairs
-        boolean hasFullHouse = hasThreeOfAKind && pairCount == 1; // Full House exists if there is a Three of a Kind and a Pair
-
-        // Return the hand type based on the conditions
+        // Return the highest-ranked hand that applies.
         if (hasFourOfAKind) return "Four of a Kind";
         if (hasFullHouse) return "Full House";
         if (hasThreeOfAKind) return "Three of a Kind";
         if (hasTwoPair) return "Two Pair";
-        if (pairCount == 1) return "One Pair"; // One Pair exists if there is exactly one pair
+        if (hasPair) return "One Pair";
 
-        return "High Card"; // If none of the above conditions are met, return "High Card"
+        // If none of the above hand types apply, return "High Card".
+        return "High Card";
     }
 }
+
