@@ -39,5 +39,16 @@ public class DeckOfCards {
             return null;
         }
     }
+    
+    // New method to deal a hand of multiple cards (e.g., five cards for the dealer)
+    public ArrayList<Card> dealHand(int numCards) {
+        ArrayList<Card> hand = new ArrayList<>();
+        for (int i = 0; i < numCards; i++) {
+            // Deal one card at a time and add it to the hand
+            hand.add(dealCard());
+        }
+        return hand;
+    }
 }
+
 
