@@ -54,14 +54,14 @@ public class Car {
         Car c1 = new Car("Toyota", "2000", 20000);
         Car c2 = new Car("Benz", "1999", 25000);
 
-        System.out.println("Original price of car 1: " + c1.getPrice());
-        System.out.println("Original price of car 2: " + c2.getPrice());
+       System.out.println("Car 1's original price: $" +c1.getPrice());
+       System.out.println("Car 2's original price: $" +c2.getPrice());;
 
         // Apply discounts
         c1.discount(5);
         c2.discount(7);
 
-        System.out.println("After discount, car 1 price: " + c1.getPrice());
-        System.out.println("After discount, car 2 price: " + c2.getPrice());
+       System.out.println("Car 1's price after discount: $" +c1.getPrice());
+       System.out.println("Car 2's price after disocunt: $" +c2.getPrice());
     }
 }
