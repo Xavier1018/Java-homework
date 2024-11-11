@@ -4,51 +4,39 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class DeckOfCards {
-    // Create an ArrayList to hold the deck of cards
-    private ArrayList<Card> deck = new ArrayList<>();
-    
-    // Constructor to initialize the deck with 52 cards (13 ranks * 4 suits)
+    private ArrayList<Card> deck;
+
+    // Constructor to initialize the deck with 52 cards
     public DeckOfCards() {
-        // Define the four suits and thirteen ranks for a deck of cards
+        deck = new ArrayList<>();
         String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
-        String[] ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
+        String[] faces = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
         
-        // Loop through each suit and rank to create a deck of 52 cards
+        // Add all 52 cards to the deck
         for (String suit : suits) {
-            for (String rank : ranks) {
-                // Add each card to the deck
-                deck.add(new Card(suit, rank));
+            for (String face : faces) {
+                deck.add(new Card(suit, face));
             }
         }
     }
-    
-    // Method to shuffle the deck using Collections.shuffle
+
+    // Method to shuffle the deck
     public void shuffle() {
-        // Shuffle the deck randomly
         Collections.shuffle(deck);
     }
-    
-    // Method to deal one card from the deck
-    public Card dealCard() {
-        // Check if the deck is not empty
-        if (!deck.isEmpty()) {
-            // Remove and return the top card from the deck
-            return deck.remove(0);
-        } else {
-            // If the deck is empty, return null
-            return null;
-        }
-    }
-    
-    // New method to deal a hand of multiple cards (e.g., five cards for the dealer)
+
+    // Method to deal a specified number of cards as a hand
     public ArrayList<Card> dealHand(int numCards) {
         ArrayList<Card> hand = new ArrayList<>();
+        
+        // Deal cards from the deck
         for (int i = 0; i < numCards; i++) {
-            // Deal one card at a time and add it to the hand
-            hand.add(dealCard());
+            hand.add(deck.remove(0));  // Remove the top card from the deck
         }
+        
         return hand;
     }
 }
+
 
 
