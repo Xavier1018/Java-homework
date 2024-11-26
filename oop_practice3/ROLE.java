@@ -29,9 +29,9 @@ public class ROLE {
 
     // The Drink method allows a character to drink a drug (either RedDrug or BlueDrug).
     // It updates the character's life or magic based on the drug's size.
-    public void Drink(Drug drug) {
-        if (drug instanceof RedDrug) { // If the drug is of type RedDrug
-            RedDrug redDrug = (RedDrug) drug;
+    public void Drink(Drug D) {
+        if (D instanceof RedDrug) { // If the drug is of type RedDrug
+            RedDrug redDrug = (RedDrug) D;
             switch (redDrug.getSize()) {
                 case "Large":
                     life += 120; // Increase life by 120 for Large RedDrug
@@ -43,8 +43,8 @@ public class ROLE {
                     life += 50; // Increase life by 50 for Small RedDrug
                     break;
             }
-        } else if (drug instanceof BlueDrug) { // If the drug is of type BlueDrug
-            BlueDrug blueDrug = (BlueDrug) drug;
+        } else if (D instanceof BlueDrug) { // If the drug is of type BlueDrug
+            BlueDrug blueDrug = (BlueDrug) D;
             switch (blueDrug.getSize()) {
                 case "Large":
                     magic += 100; // Increase magic by 100 for Large BlueDrug
@@ -68,7 +68,7 @@ public class ROLE {
         }
 
         // Output the action of drinking the drug
-        System.out.println(name + " drank a " + drug.getSize() + " bottle.");
+        System.out.println(name + " drank a " + D.getSize() + " bottle.");
     }
 
     // Overriding toString() to print the current status of the character
