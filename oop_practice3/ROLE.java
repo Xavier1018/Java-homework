@@ -11,9 +11,14 @@ public abstract class ROLE {
         this.life = life;
         this.magic = magic;
     }
+    
+    public ROLE() {
+    	this.name="";
+    	this.life=0;
+    	this.magic=0;
+    }
 
-    public abstract void NewMoon(ROLE target);
-    public abstract void SmallFire(ROLE target);
+
 
     public String getName() {
         return name;
@@ -79,7 +84,6 @@ public abstract class ROLE {
         return "Name: " + name + ", Life: " + life + ", Magic: " + magic;
     }
 }
-
 
 
 
