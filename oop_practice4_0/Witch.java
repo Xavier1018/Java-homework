@@ -1,47 +1,49 @@
 package oop_practice4_0;
 
-//Witch class extends ROLE and implements MagicRecoverable for magic recovery
-public class Witch extends ROLE implements MagicRecoverable {
+public class Witch extends ROLE implements LifeRecoverable, MagicRecoverable {
 
- // Default constructor
- public Witch() {
-     super("Witch", 280, 200); // Default life = 280, magic = 200
- }
+    // Constructor to initialize Witch with default values
+    public Witch(String name) {
+        super(name, 280, 200); // Default life = 280, magic = 200
+    }
 
- // Constructor with custom name
- public Witch(String name) {
-     super(name, 280, 200); // Default life = 280, magic = 200
- }
+    // Implement the attack method for Witch
+    @Override
+    public void attack(ROLE target) {
+        if (getMagic() >= 10) {
+            reduceMagic(10); // Deduct 10 magic for each attack
+            target.reduceLife(20); // Cause 20 damage to target
+            System.out.println(getName() + " attacked " + target.getName() + " with SmallFire.");
+        } else {
+            System.out.println("Not enough magic for SmallFire.");
+        }
+    }
 
- // Implementing the recoverMagic method from MagicRecoverable interface
- @Override
- public double recoverMagic() {
-     magic += MAGICRATE; // Recover magic
-     if (magic > 200) {  // Ensure magic doesn't exceed maximum value
-         magic = 200;
-     }
-     return magic;
- }
+    // Witch's auto recovery for life
+    @Override
+    public double recoverLife() {
+        double recoveredLife = LIFERATE; // Recover 10 life points automatically
+        setLife(getLife() + (int) recoveredLife);
+        return recoveredLife;
+    }
 
- // Method for attacking with SmallFire
- public void SmallFire(ROLE target) {
-     if (magic >= 25) {
-         magic -= 25; // Deduct 25 magic for each attack
-         if (target instanceof Warrior) {
-             target.life -= 40; // Attack a warrior
-         } else if (target instanceof Witch) {
-             target.life -= 60; // Attack a witch
-         } else if (target instanceof Priest) {
-             target.life -= 50; // Attack a priest
-         }
+    // Witch's auto recovery for magic
+    @Override
+    public double recoverMagic() {
+        double recoveredMagic = MAGICRATE; // Recover 4 magic points automatically
+        setMagic(getMagic() + (int) recoveredMagic);
+        return recoveredMagic;
+    }
 
-         // Check if the target has died
-         if (target.getLife() <= 0) {
-             System.out.println(target.getName() + " has died.");
-         }
-     } else {
-         System.out.println("Not enough magic for spell.");
-     }
- }
+    // Witch's auto drink method (if needed, for health or magic recovery)
+    public void autoDrink() {
+        if (getLife() < 100) {
+            setLife(getLife() + 50); // Recover life if needed
+            System.out.println(getName() + " drank a potion and recovered 50 life.");
+        }
+        if (getMagic() < 50) {
+            setMagic(getMagic() + 30); // Recover magic if needed
+            System.out.println(getName() + " drank a potion and recovered 30 magic.");
+        }
+    }
 }
-
