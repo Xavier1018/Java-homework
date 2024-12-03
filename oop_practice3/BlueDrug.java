@@ -1,18 +1,32 @@
 package oop_practice3;
 
+//BlueDrug class increases magic points
 public class BlueDrug extends Drug {
-    private int addMagic;
+ private int addMagic;
 
-    // Constructor to initialize the size and the amount of magic added by the BlueDrug.
-    public BlueDrug(String size, int addMagic) {
-        super(size);
-        this.addMagic = addMagic;
-    }
+ // Constructor
+ public BlueDrug(String size) {
+     super(size);
+     switch (size) {
+         case "Large":
+             this.addMagic = 100;
+             break;
+         case "Medium":
+             this.addMagic = 60;
+             break;
+         case "Small":
+             this.addMagic = 30;
+             break;
+         default:
+             throw new IllegalArgumentException("Invalid size for BlueDrug");
+     }
+ }
 
-    // Getter method for the amount of magic added by the BlueDrug.
-    public int getAddMagic() {
-        return addMagic;
-    }
+ // Returns the magic points added
+ @Override
+ public int getEffect() {
+     return addMagic;
+ }
 }
 
 
