@@ -1,48 +1,51 @@
 package oop_practice4_0;
 
-//Warrior class extends ROLE and implements LifeRecoverable for life recovery
-public class Warrior extends ROLE implements LifeRecoverable {
- 
- // Default constructor
- public Warrior() {
-     super("Warrior", 400, 100); // Default life = 400, magic = 100
- }
+public class Warrior extends ROLE implements LifeRecoverable, MagicRecoverable {
 
- // Constructor with custom name
- public Warrior(String name) {
-     super(name, 400, 100); // Default life = 400, magic = 100
- }
+    // Constructor to initialize Warrior with default values
+    public Warrior(String name) {
+        super(name, 400, 100); // Default life = 400, magic = 100
+    }
 
- // Implementing the recoverLife method from LifeRecoverable interface
- @Override
- public double recoverLife() {
-     life += LIFERATE; // Recover life
-     if (life > 400) {  // Ensure life doesn't exceed maximum value
-         life = 400;
-     }
-     return life;
- }
+    // Implement the attack method for Warrior
+    @Override
+    public void attack(ROLE target) {
+        if (getMagic() >= 15) {
+            reduceMagic(15); // Deduct 15 magic for each attack
+            target.reduceLife(25); // Cause 25 damage to target
+            System.out.println(getName() + " attacked " + target.getName() + " with NewMoon.");
+        } else {
+            System.out.println("Not enough magic for NewMoon.");
+        }
+    }
 
- // Method for attacking with NewMoon
- public void NewMoon(ROLE target) {
-     if (magic >= 10) {
-         magic -= 10; // Deduct 10 magic for each attack
-         if (target instanceof Warrior) {
-             target.life -= 25; // Attack a warrior
-         } else if (target instanceof Witch) {
-             target.life -= 40; // Attack a witch
-         } else if (target instanceof Priest) {
-             target.life -= 30; // Attack a priest
-         }
+    // Warrior's auto recovery for life
+    @Override
+    public double recoverLife() {
+        double recoveredLife = LIFERATE; // Recover 10 life points automatically
+        setLife(getLife() + (int) recoveredLife);
+        return recoveredLife;
+    }
 
-         // Check if the target has died
-         if (target.getLife() <= 0) {
-             System.out.println(target.getName() + " has died.");
-         }
-     } else {
-         System.out.println("Not enough magic for attack.");
-     }
- }
+    // Warrior's auto recovery for magic
+    @Override
+    public double recoverMagic() {
+        double recoveredMagic = MAGICRATE; // Recover 4 magic points automatically
+        setMagic(getMagic() + (int) recoveredMagic);
+        return recoveredMagic;
+    }
+
+    // Warrior's auto drink method (if needed, for health or magic recovery)
+    public void autoDrink() {
+        if (getLife() < 100) {
+            setLife(getLife() + 50); // Recover life if needed
+            System.out.println(getName() + " drank a potion and recovered 50 life.");
+        }
+        if (getMagic() < 50) {
+            setMagic(getMagic() + 30); // Recover magic if needed
+            System.out.println(getName() + " drank a potion and recovered 30 magic.");
+        }
+    }
 }
 
 
