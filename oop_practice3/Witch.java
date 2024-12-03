@@ -1,6 +1,9 @@
 package oop_practice3;
 
 public class Witch extends ROLE {
+	public Witch() {
+		super("known",280,200);
+	}
     public Witch(String name) {
         super(name, 280, 200); 
     }
