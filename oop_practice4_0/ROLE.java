@@ -11,6 +11,12 @@ public abstract class ROLE {
         this.life = life;
         this.magic = magic;
     }
+    
+    public ROLE() {
+    	this.name="unknown";
+    	this.life=0;
+    	this.magic=0;
+    }
 
     // Getter for life
     public int getLife() {
