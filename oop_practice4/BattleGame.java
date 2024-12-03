@@ -14,8 +14,8 @@ public class BattleGame {
 
         // Print the final statuses of the characters
         System.out.println("\nFinal Statuses:");
-        System.out.println("Warrior - Life: " + warrior.getLife() + ", Magic: " + warrior.getMagic());
-        System.out.println("Witch - Life: " + witch.getLife() + ", Magic: " + witch.getMagic());
-        System.out.println("Priest - Life: " + priest.getLife() + ", Magic: " + priest.getMagic());
+        System.out.println(warrior); // Display Warrior's status
+        System.out.println(witch); // Display Witch's status
+        System.out.println(priest); // Display Priest's status
     }
 }
