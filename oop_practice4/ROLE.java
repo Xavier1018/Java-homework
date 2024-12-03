@@ -12,6 +12,13 @@ public class ROLE {
         this.magic = magic;
     }
 
+    // Default constructor
+    public ROLE() {
+        this.name = "";
+        this.life = 0;
+        this.magic = 0;
+    }
+
     // Getter for name
     public String getName() {
         return name;
@@ -30,6 +37,12 @@ public class ROLE {
     // Method to check if the character is alive (life > 0)
     public boolean isAlive() {
         return life > 0;
+    }
+
+    // Override toString() to display the character's details
+    @Override
+    public String toString() {
+        return name + " - Life: " + life + ", Magic: " + magic;
     }
 }
 
