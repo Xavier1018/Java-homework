@@ -8,13 +8,7 @@ public class Witch extends ROLE {
         super(name, 280, 200); 
     }
 
-    @Override
-    public void NewMoon(ROLE target) {
-        
-        System.out.println(getName() + " cannot use New Moon.");
-    }
-
-    @Override
+ 
     public void SmallFire(ROLE target) {
         if (target == null) {
             System.out.println("Target is null. No action performed.");
