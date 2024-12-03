@@ -1,18 +1,30 @@
 package oop_practice3;
 
+//RedDrug class increases life points
 public class RedDrug extends Drug {
-    private int addLife;
+ private int addLife;
 
-    // Constructor to initialize the size and the amount of life added by the RedDrug.
-    public RedDrug(String size, int addLife) {
-        super(size);
-        this.addLife = addLife;
-    }
+ // Constructor
+ public RedDrug(String size) {
+     super(size);
+     switch (size) {
+         case "Large":
+             this.addLife = 120;
+             break;
+         case "Medium":
+             this.addLife = 80;
+             break;
+         case "Small":
+             this.addLife = 50;
+             break;
+         default:
+             throw new IllegalArgumentException("Invalid size for RedDrug");
+     }
+ }
 
-    // Getter method for the amount of life added by the RedDrug.
-    public int getAddLife() {
-        return addLife;
-    }
+ // Returns the life points added
+ @Override
+ public int getEffect() {
+     return addLife;
+ }
 }
-
-
