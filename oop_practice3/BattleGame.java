@@ -3,58 +3,55 @@ package oop_practice3;
 import java.util.Random;
 
 public class BattleGame {
- public static void main(String[] args) {
-     // Create a new warrior character with initial life and magic points.
-     ROLE warrior = new ROLE("Warrior", 80, 50);
-     Random random = new Random();
+    public static void main(String[] args) {
+        Warrior[] warriors = {
+            new Warrior("Warrior1"),
+            new Warrior("Warrior2"),
+            new Warrior("Warrior3")
+        };
 
-     // Create various RedDrugs and BlueDrugs with different sizes.
-     RedDrug smallRed = new RedDrug("Small", 50);
-     RedDrug mediumRed = new RedDrug("Medium", 80);
-     RedDrug largeRed = new RedDrug("Large", 120);
+        Witch[] witches = {
+            new Witch("Witch1"),
+            new Witch("Witch2"),
+            new Witch("Witch3")
+        };
 
-     BlueDrug smallBlue = new BlueDrug("Small", 30);
-     BlueDrug mediumBlue = new BlueDrug("Medium", 60);
-     BlueDrug largeBlue = new BlueDrug("Large", 100);
+        Random random = new Random();
 
-     // Continue the loop while the warrior's life is less than 100 or magic is less than 70.
-     while (warrior.getLife() < 100 || warrior.getMagic() < 70) {
-         int chance = random.nextInt(100); // Generate a random chance for drinking the drug
+        while (true) {
+            // Randomly select a Warrior and a Witch
+            Warrior selectedWarrior = warriors[random.nextInt(warriors.length)];
+            Witch selectedWitch = witches[random.nextInt(witches.length)];
 
-         // If warrior's life is less than 100, drink a RedDrug
-         if (warrior.getLife() < 100) {
-             if (chance < 10) {
-                 warrior.Drink(largeRed); // Drink large RedDrug
-             } else if (chance < 40) {
-                 warrior.Drink(mediumRed); // Drink medium RedDrug
-             } else if (chance < 80) {
-                 warrior.Drink(smallRed); // Drink small RedDrug
-             } else {
-                 System.out.println(warrior.getName() + " did not drink anything this time.");
-             }
-         }
+            // Warrior attacks
+            selectedWarrior.NewMoon(selectedWitch);
+            System.out.println(selectedWitch.getName() + " Status: Life = " + selectedWitch.getLife() + ", Magic = " + selectedWitch.getMagic());
 
-         // If warrior's magic is less than 70, drink a BlueDrug
-         if (warrior.getMagic() < 70) {
-             chance = random.nextInt(100); // Generate a new random chance for BlueDrug
+            // Witch drinks drugs if needed
+            selectedWitch.autoDrink();
 
-             if (chance < 10) {
-                 warrior.Drink(largeBlue); // Drink large BlueDrug
-             } else if (chance < 40) {
-                 warrior.Drink(mediumBlue); // Drink medium BlueDrug
-             } else if (chance < 80) {
-                 warrior.Drink(smallBlue); // Drink small BlueDrug
-             } else {
-                 System.out.println(warrior.getName() + " did not drink anything this time.");
-             }
-         }
+            // Check if Witch is defeated
+            if (selectedWitch.getLife() == 0) {
+                System.out.println(selectedWitch.getName() + " has been defeated.");
+                break;
+            }
 
-         // Print the current status after each drink
-         System.out.println("Current Status: " + warrior);
-     }
+            // Witch attacks
+            selectedWitch.SmallFire(selectedWarrior);
+            System.out.println(selectedWarrior.getName() + " Status: Life = " + selectedWarrior.getLife() + ", Magic = " + selectedWarrior.getMagic());
 
-     // Print the final status once the conditions are met
-     System.out.println("\nFinal Status: " + warrior);
- }
+            // Warrior drinks drugs if needed
+            selectedWarrior.autoDrink();
+
+            // Check if Warrior is defeated
+            if (selectedWarrior.getLife() == 0) {
+                System.out.println(selectedWarrior.getName() + " has been defeated.");
+                break;
+            }
+        }
+
+        System.out.println("\nGame Over!");
+    }
 }
+
 
