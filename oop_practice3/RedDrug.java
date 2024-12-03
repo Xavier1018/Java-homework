@@ -28,3 +28,4 @@ public class RedDrug extends Drug {
      return addLife;
  }
 }
+
