@@ -1,14 +1,17 @@
 package oop_practice3;
 
-public class Drug {
-    private String size;
+public abstract class Drug {
+    protected String size;
 
-    // Constructor to initialize the size of the drug.
+    // Constructor
     public Drug(String size) {
         this.size = size;
     }
 
-    // Getter method for the size of the drug.
+    // Abstract method to get the effect value (overridden in subclasses)
+    public abstract int getEffect();
+
+    // Getter for size
     public String getSize() {
         return size;
     }
