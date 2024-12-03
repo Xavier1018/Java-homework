@@ -1,3 +1,4 @@
+package oop_practice2_0;
 // The ROLE class represents a generic character in the game with attributes like name, life, and magic.
 public class ROLE {
     private String Name;  // Name of the character
@@ -49,5 +50,4 @@ public class ROLE {
         return String.format("Name: %s, Life: %d, Magic: %d", Name, life, Magic);
     }
 }
-
 
